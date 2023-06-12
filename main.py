@@ -125,4 +125,5 @@ def get_recommendations_by_product_details(prod : Annotated[Product,Body(example
         return {"Error":"Sorry, no product found for this title and category"}
     return recommend.find_similar_products(product_id,5)
 
-    
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)    
