@@ -49,7 +49,7 @@ product_id2 = col2.selectbox('Or Select a Product ID', [''] + product_id_options
 if product_id or product_id2:
     if product_id2:
         product_id = product_id2
-    response = requests.get(f"http://localhost:8000/{product_id}")
+    response = requests.get(f"https://product-recommender.azurewebsites.net/{product_id}")
     data = response.json()
     if "Error" in data:
         st.error(data["Error"])
@@ -72,7 +72,7 @@ default_image_url = "https://via.placeholder.com/200x200?text=No+Image"
 if product_title and category:
 
     # Send a POST request to the FastAPI endpoint with the user input as JSON data
-    response = requests.post(f"http://localhost:8000/{product_title}/{category}", json={"product_title": product_title, "category": category})
+    response = requests.post(f"https://product-recommender.azurewebsites.net/{product_title}/{category}", json={"product_title": product_title, "category": category})
     data = response.json()
     if "Error" in data:
         st.error(data["Error"])
