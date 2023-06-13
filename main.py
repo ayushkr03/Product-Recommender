@@ -13,7 +13,7 @@ class recommend:
     import numpy as np
     
     global data,combined_features
-    data = pd.read_pickle("my_data.pkl")
+    data = pd.read_pickle("my_data2.pkl")
     # Get the item feature matrix
     combined_features = np.vstack(data["combined_vector"])
 
