@@ -65,7 +65,7 @@ class Product(BaseModel):
                       
 @app.get("/{product_id}")
 def get_recommendations_by_product_id(product_id : str): #product_id : str , prod : Annotated[Product_id,Body(examples = example_id)]
-    '''Some Product IDs : B009RSSMBU , B008Z0QG5A , B0054MZGTO , B00D4L2D6Q , B004S92MIW '''
+    '''Some Product IDs : [' B0009U69UG ',' B00FQN7LXK ',' B008TZWRBI ',' B006XW8A56 ',' B0009G8BNS '] '''
     product_id = product_id.strip()
     try:
         rows = data[data['product_id'] == product_id].values[0]     
@@ -80,37 +80,37 @@ example={
                 "1": {
                   "summary": "A normal example 1",
                     "value": {
-                                "product_title": "La Leela Men's Hawaiian Print Shirt",
-                                "category": "casual button down shirts"
+                                "product_title": "Carhartt Men's Heavyweight Crewneck Sweatshirt",
+                                "category": "clothing carhartt sweatshirts"
                              },
                      },
                 
                 "2": {
                     "summary": "A normal example 2",
                     "value": {
-                                "product_title": "Reyn Spooner Men's Christmas Commemorative Shirt",
-                                "category": "casual button down shirts"
+                                "product_title": "Bay Island Sportswear Men's Bring Me The Horizon &quot;Smooli&quot; Slim Fit T-Shirt",
+                                "category": "t shirts"
                              },
                      },
                 "3": {
                     "summary": "A normal example 3",
                     "value": {
-                                "product_title": "Men's Short Sleeve Rayon Hawaiian Tropical Pattern Shirts",
-                                "category": "casual button down shirts"
+                                "product_title": "The Walking Dead Warning Sign Men's T-Shirt",
+                                "category": "clothing men t shirts"
                              },
                      },
                 "4": {
                     "summary": "A normal example 4",
                     "value": {
-                                "product_title": "Parrot Hawaiian Shirt",
-                                "category": "casual button down shirts"
+                                "product_title": "Lego Star Wars -- Dark Pieces T-Shirt, X-Large",
+                                "category": "t shirts men"
                              },
                      },
                 "5": {
                     "summary": "A normal example 5",
                     "value": {
-                                "product_title": "Cubavera Men's Short Sleeve Rayon Hawaiian Printed Color Block Shirt, Blue, Small",
-                                "category": "casual button down shirts"
+                                "product_title": "Authentic Pigment Unisex-Adult 5.6 Oz. Pigment-Dyed &amp; Direct-Dyed Ringspun Pocket T-Shirt",
+                                "category": "t shirts"
                              },
                      }
             }

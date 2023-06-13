@@ -4,11 +4,51 @@ import PIL.Image
 import io
 
 
+product_id_options=['B0009U69UG',
+ 'B00FQN7LXK',
+ 'B008TZWRBI',
+ 'B006XW8A56',
+ 'B0009G8BNS',
+ 'B00075ZYRW',
+ 'B009FNMDXA',
+ 'B0057QR3MK',
+ 'B001YK4GNC',
+ 'B005YP21XU']
+prod_title_options=["Carhartt Men's Heavyweight Crewneck Sweatshirt",
+ "Bay Island Sportswear Men's Bring Me The Horizon &quot;Smooli&quot; Slim Fit T-Shirt",
+ "The Walking Dead Warning Sign Men's T-Shirt",
+ 'Lego Star Wars -- Dark Pieces T-Shirt, X-Large',
+ 'Authentic Pigment Unisex-Adult 5.6 Oz. Pigment-Dyed &amp; Direct-Dyed Ringspun Pocket T-Shirt',
+ "Russell Athletic Men's Basic Cotton Tee",
+ 'Clever Girl -- Jurassic Park Adult T-Shirt',
+ 'Dragon Ball Z Goku Top:Small (Small)',
+ '24 Stainless Steel Metal Collar Stays for Dress Shirts',
+ 'GUESS Campus Shirt']
+prod_category_options=['clothing carhartt sweatshirts',
+ 't shirts',
+ 'clothing men t shirts',
+ 't shirts men',
+ 't shirts',
+ 'clothing active shirts tees big tall',
+ 'novelty t shirts men',
+ 't shirts men',
+ 'accessories dress shirts',
+ 'casual button down shirts guess']
+
+
+
+
+st.set_page_config(page_title='Product Recommender', page_icon=':smiley:', layout='wide')
 st.title("Product Recommender")
 
-product_id = st.text_input("Enter a product id")
+st.subheader("Search by Product ID")
+col1, col2 = st.columns(2)
+product_id = col1.text_input("Enter a product id") 
 
-if product_id:
+product_id2 = col2.selectbox('Or Select a Product ID', [''] + product_id_options)
+if product_id or product_id2:
+    if product_id2:
+        product_id = product_id2
     response = requests.get(f"http://localhost:8000/{product_id}")
     data = response.json()
     if "Error" in data:
@@ -18,14 +58,19 @@ if product_id:
         for item in data:
             st.markdown(f"- {item['product_title']} ({item['similarity']})")
 
+
+st.subheader("Search by Product Title & Category")            
+col3, col4 = st.columns(2)
 # Get the product title and category from the user
-product_title = st.text_input("Enter a product title")
-category = st.selectbox("Select a category", ["casual button down shirts", "other"])
+
+product_title = col3.selectbox('Select a Product Title', [''] + prod_title_options)
+category = col4.selectbox("Select a category", [''] + prod_category_options)
 
 # Define a variable that holds the URL of the default or placeholder image
 default_image_url = "https://via.placeholder.com/200x200?text=No+Image"
 
 if product_title and category:
+
     # Send a POST request to the FastAPI endpoint with the user input as JSON data
     response = requests.post(f"http://localhost:8000/{product_title}/{category}", json={"product_title": product_title, "category": category})
     data = response.json()
