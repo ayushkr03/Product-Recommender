@@ -1,9 +1,3 @@
 #!/bin/bash
-pip install -r requirements.txt
+pip install -r requirements.txt & uvicorn main:app --reload
 
-if [ $? -eq 0 ]
-then
-    uvicorn main:app --reload &
-else
-    echo "Failed to install dependencies"
-fi
