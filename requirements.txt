@@ -31,6 +31,7 @@ pandas==2.0.2
 Pillow==9.5.0
 protobuf==4.23.2
 pyarrow==12.0.0
+pybase64==1.2.3
 pycparser==2.21
 pydantic==1.10.9
 pydeck==0.8.1b0
