@@ -44,12 +44,13 @@ class recommend:
         similarities = sklearn.metrics.pairwise.cosine_similarity(vector.reshape(1,-1), combined_features)[0]
         
          # Sort the similarities in descending order and get the indices of the top-k products
-        indices = np.argsort(similarities)[::-1][:k]
+        indices = np.argsort(similarities)[::-1][:k+1]
         
         df = data2[["product_id", "product_title", "rating", "unix_review_time","help_prop", "salesrank","category","clean_text","imgurl"]].iloc[indices]
         df["similarity"] = similarities[indices]
         df["similarity"] = df['similarity'].round(decimals = 3)
-        
+        #To remove the same product
+        df = df.loc[df['product_id'] != product_id]
     # Sort the data by rating
         df = df.sort_values('rating', ascending=False)
     # Convert to dictionary preserving the order of rows    
