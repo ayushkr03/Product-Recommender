@@ -75,6 +75,18 @@ background: rgb(222 222 217 / 55%);
 color: rgb(0 0 0);
 }}
 
+[data-testid="stHeader"]{{
+position: fixed;
+top: 0px;
+left: 0px;
+right: 0px;
+height: 2.875rem;
+background: rgb(77 76 63 / 48%);
+outline: none;
+z-index: 999990;
+display: block;
+}}
+
 [data-testid="stSidebar"] {{
 background-image: url("data:image/png;base64,{img2}");
 background-size: cover;
