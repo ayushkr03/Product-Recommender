@@ -4,6 +4,15 @@ import requests
 import PIL.Image
 import io
 
+import pickle
+import pandas as pd
+import numpy as np
+    
+global df2
+df2 = pd.read_pickle("my_data2.pkl")
+
+prod_title_options = df2['product_title'].unique().tolist()
+
 product_id_options=['B0009U69UG',
  'B00FQN7LXK',
  'B008TZWRBI',
@@ -14,7 +23,7 @@ product_id_options=['B0009U69UG',
  'B0057QR3MK',
  'B001YK4GNC',
  'B005YP21XU']
-prod_title_options=["Carhartt Men's Heavyweight Crewneck Sweatshirt",
+prod_title=["Carhartt Men's Heavyweight Crewneck Sweatshirt",
  "Bay Island Sportswear Men's Bring Me The Horizon &quot;Smooli&quot; Slim Fit T-Shirt",
  "The Walking Dead Warning Sign Men's T-Shirt",
  'Lego Star Wars -- Dark Pieces T-Shirt, X-Large',
@@ -24,7 +33,7 @@ prod_title_options=["Carhartt Men's Heavyweight Crewneck Sweatshirt",
  'Dragon Ball Z Goku Top:Small (Small)',
  '24 Stainless Steel Metal Collar Stays for Dress Shirts',
  'GUESS Campus Shirt']
-prod_category_options=['clothing carhartt sweatshirts',
+prod_category=['clothing carhartt sweatshirts',
  't shirts',
  'clothing men t shirts',
  't shirts men',
@@ -126,7 +135,10 @@ col3, col4 = st.columns(2)
 # Get the product title and category from the user
 
 product_title = col3.selectbox('**Select a Product Title**', [''] + prod_title_options)
-category = col4.selectbox("**Select a category**", [''] + prod_category_options)
+
+prod_category_options = list(set(df2.loc[df2['product_title'] == product_title]['category'].tolist()))
+
+category = col4.selectbox("**Select a category**", prod_category_options)
 
 # Define a variable that holds the URL of the default or placeholder image
 default_image_url = "https://via.placeholder.com/200x200?text=No+Image"
