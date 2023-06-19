@@ -111,7 +111,7 @@ product_id2 = col2.selectbox('**Or Select a Product ID**', [''] + product_id_opt
 if product_id or product_id2:
     if product_id2:
         product_id = product_id2
-    response = requests.get(f"http://product-recommender.azurewebsites.net/{product_id}")
+    response = requests.get(f"https://product-recommender.azurewebsites.net/{product_id}")
     data = response.json()
     if "Error" in data:
         st.error(data["Error"])
