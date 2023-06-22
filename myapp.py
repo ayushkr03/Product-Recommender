@@ -10,7 +10,6 @@ import numpy as np
     
 global df2
 df2 = pd.read_pickle("my_data2.pkl")
-df = df[~df['product_title'].str.contains('women|woman|stay|stays',case=False)]
 prod_title_options = df2['product_title'].unique().tolist()
 
 product_id_options=['B0009U69UG',
