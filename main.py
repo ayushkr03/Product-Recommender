@@ -6,17 +6,16 @@ from fastapi import Query
 import uvicorn
 import pickle
 import pandas as pd
+import numpy as np
+    
+global data,combined_features
+data = pd.read_pickle("my_data2.pkl")
+data =data[~data['product_title'].str.contains('women|woman|stay|stays',case=False)]
+
+# Get the item feature matrix
+combined_features = np.vstack(data["combined_vector"])
 
 class recommend:
-    import pickle
-    import pandas as pd
-    import numpy as np
-    
-    global data,combined_features
-    data = pd.read_pickle("my_data2.pkl")
-    # Get the item feature matrix
-    combined_features = np.vstack(data["combined_vector"])
-
     # Define a function to find the top-k products that are most similar to a given product
     def find_similar_products(product_id, k):
         import pandas as pd
