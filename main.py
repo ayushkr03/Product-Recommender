@@ -14,7 +14,6 @@ class recommend:
     
     global data,combined_features
     data = pd.read_pickle("my_data2.pkl")
-    data = data[~data['product_title'].str.contains('women|woman|stay|stays',case=False)]
     # Get the item feature matrix
     combined_features = np.vstack(data["combined_vector"])
 
