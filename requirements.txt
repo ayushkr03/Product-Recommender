@@ -3,6 +3,7 @@ anyio==3.7.0
 attrs==23.1.0
 azure-core==1.27.0
 blinker==1.6.2
+bz2file==0.98
 cachetools==5.3.1
 certifi==2023.5.7
 cffi==1.15.1
@@ -31,6 +32,7 @@ pandas==2.0.2
 Pillow==9.5.0
 protobuf==4.23.2
 pyarrow==12.0.0
+pybase64==1.2.3
 pycparser==2.21
 pydantic==1.10.9
 pydeck==0.8.1b0
