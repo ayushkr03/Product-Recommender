@@ -199,6 +199,6 @@ def get_recommendations_by_brand_name_and_category(prod : Annotated[Product,Body
         return {"Error":"Sorry, no product found for this brand and category"}
     return recommend.find_similar_products(prod.brand_name,k2,prod.category)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+#if __name__ == "__main__":
+#    import uvicorn
+#    uvicorn.run(app, host="0.0.0.0", port=8000)
