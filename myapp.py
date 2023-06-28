@@ -1,3 +1,4 @@
+import base64
 import streamlit as st
 import requests
 import PIL.Image
@@ -35,13 +36,90 @@ prod_category_options=['clothing carhartt sweatshirts',
  'accessories dress shirts',
  'casual button down shirts guess']
 
+#st.set_page_config(page_title='Product Recommender', page_icon=':smiley:', layout='wide')
+
+def get_img_as_base64(file):
+    with open(file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
 
+img1 = get_img_as_base64("mygif.gif")
+img2 = get_img_as_base64("mygif3.gif")
 
-st.set_page_config(page_title='Product Recommender', page_icon=':smiley:', layout='wide')
+
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("data:image/png;base64,{img1}");
+background-size: cover;
+background-position: top left;
+background-repeat: no-repeat;
+background-attachment: local;
+background-color: rgba(249,240,220,0.81);
+}}
+
+[class="main css-uf99v8 e1g8pov65"]{{
+background-color: rgba(249,240,220,0.81);
+color: rgb(0 0 0);
+}}
+
+[class="block-container css-1y4p8pa e1g8pov64"]{{
+max-width: 70rem;
+border-radius: 25px;
+background: rgb(255,252,223,0.94);
+color: rgb(0 0 0);
+}}
+
+[data-testid="stHeader"] {{
+border-radius: 2px;
+background-color: rgba(37,35,31,0.81);
+}}
+
+[data-testid="stSidebar"] {{
+background-image: url("data:image/png;base64,{img2}");
+background-size: cover;
+background-position: center; 
+background-repeat: no-repeat;
+background-attachment: local;
+overflow: hidden;
+}}
+
+[class="css-10vh4h9 e1akgbir0"]{{
+background: rgb(0 0 0 / 72%);
+}}
+
+[data-testid="stVerticalBlock"]{{
+max-width: 50rem;
+border-radius: 8px;
+background: rgb(251,242,207,0.18);;
+color: rgb(0 0 0);
+}}
+
+[class="css-1544g2n e1akgbir4"]{{
+padding: 38rem 1rem 1rem;
+}}
+
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("Product Recommender")
 
-st.subheader("Search by Product ID")
+# Using object notation
+with st.sidebar.container():
+    st.sidebar.subheader('Contact Information')
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown('<a href="mailto:ayushkumar.ae@gmail.com"><img src="https://img.icons8.com/material-outlined/40/000000/new-post.png"/></a>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<a href="https://github.com/ayushkr03"><img src="https://img.icons8.com/material-outlined/40/000000/github.png"/></a>', unsafe_allow_html=True)
+
+    with col3:
+        st.markdown('<a href="https://www.linkedin.com/in/ayushkumar03/"><img src="https://img.icons8.com/material-outlined/40/000000/linkedin.png"/></a>', unsafe_allow_html=True)
+
+st.header("Search by Product ID")
 col1, col2 = st.columns(2)
 product_id = col1.text_input("Enter a product id") 
 
@@ -56,7 +134,7 @@ if product_id or product_id2:
     else:
         st.write(f"Recommendations for {product_id}:")
         for item in data:
-            st.markdown(f"- {item['product_title']} ({item['similarity']})")
+            st.markdown(f"- {item['product_title']} ( {item['similarity']} )")
 
 
 st.subheader("Search by Product Title & Category")            
@@ -77,7 +155,7 @@ if product_title and category:
     if "Error" in data:
         st.error(data["Error"])
     else:
-        st.write(f"Recommendations for {product_title} - {category}:")
+        st.write(f"Recommendations for _:orange[{product_title}]_ - {category}:")
         for item in data:
             # Check if the product_img_url field is present and valid
             if "imgurl" in item and item["imgurl"]:
@@ -101,8 +179,15 @@ if product_title and category:
                 img_bytes = io.BytesIO(img_data)
                 img = PIL.Image.open(img_bytes)
             # Display the image, title, and similarity score in a column layout
-            col1, col2 = st.columns(2)
+            col1, col2, col3, col4 = st.columns(4)
             with col1:
                 st.image(img, width=200)
+                #st.image(f'<img src="{img}" style="border-radius: 50%; width:200">',unsafe_allow_html=True)
             with col2:
-                st.markdown(f"- {item['product_title']} ({item['similarity']})")
+                st.markdown(f"- Title - {item['product_title']}")
+                st.markdown(f"- Rating - {item['rating']}")
+                st.markdown(f"- Similarity - {item['similarity']}")
+            #with col3:
+                            
+        st.success('Successful Recommendation! Have a Nice Day', icon="✅")
+               
