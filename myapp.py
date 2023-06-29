@@ -14,7 +14,7 @@ def decompress_pickle(file):
     data = pickle.load(data)
     return data
 
-FASTAPI_URL = "https://my-product-recommender.azurewebsites.net"
+FASTAPI_URL = "https://product-recommender.azurewebsites.net"
 
 #FASTAPI_URL = "http://localhost:8000"
 
