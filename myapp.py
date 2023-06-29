@@ -18,7 +18,7 @@ FASTAPI_URL = "https://product-recommender.azurewebsites.net"
 
 #FASTAPI_URL = "http://localhost:8000"
 
-df = pd.read_pickle("embedded.pkl")
+df = pd.read_pickle("embedded2.pkl")
 #df = decompress_pickle('sentencetransformer2.pbz2')
 product_id_options = df['product_id'].value_counts().sort_values(ascending=False)
 product_id_options = product_id_options.index.tolist()
