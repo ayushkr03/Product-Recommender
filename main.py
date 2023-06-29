@@ -16,8 +16,8 @@ def decompress_pickle(file):
     return data
 
 global data,combined_features
-#data = decompress_pickle('sentencetransformer2.pbz2')
-data = pd.read_pickle("embedded.pkl")
+#data = decompress_pickle('filename.pbz2')
+data = pd.read_pickle("embedded2.pkl")
 combined_features = np.vstack(data["combined_vector"])
 
 class recommend:
