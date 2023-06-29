@@ -76,7 +76,7 @@ class recommend:
             (recommended_products["brand_name"] == brand_name)
         ]
         same_category_products = recommended_products[
-            (recommended_products["category"] == selected_category) | 
+            (recommended_products["category"] == selected_category) & 
             (recommended_products["brand_name"] != brand_name)
         ]
         same_brand_products = recommended_products[
@@ -84,7 +84,7 @@ class recommend:
             (recommended_products["brand_name"] == brand_name)
         ]
         other_category_brand_products = recommended_products[
-            (recommended_products["category"] != selected_category) | 
+            (recommended_products["category"] != selected_category) & 
             (recommended_products["brand_name"] != brand_name)
         ]
         

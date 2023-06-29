@@ -1,1 +1,1 @@
-# item-based-recommender
+# Product-recommender
