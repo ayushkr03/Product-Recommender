@@ -115,9 +115,8 @@ if product_id or (brand_name1 and category1):
                     similarity_percentage = item['similarity'] * 100
                     color = "green" if similarity_percentage >= 60 else "red"
                       
-                    with col4:
-                        if st.button('Match'):
-                    st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)
+                    if col4.button('Match'):
+                        st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)
 
                     st.markdown(f"🔗 Title - **{item['product_title']}**")
                     st.markdown(f"🔗 Brand - **{item['brand_name']}**")
