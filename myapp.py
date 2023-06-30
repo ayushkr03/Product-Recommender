@@ -39,9 +39,6 @@ border-radius: 8px;
 padding:15px 15px 15px 15px;
 background: rgb(0 0 0 / 0.9%);
 }}
-[data-testid="stHeader"]{{
-background: rgb(227 227 227 / 57%);
-}}
 </style>
 """
 
@@ -113,16 +110,21 @@ if product_id or (brand_name1 and category1):
                 with col1:
                     st.image(img, use_column_width="auto") #width=200
                 with col2:
-                    st.markdown(f"🔗 Product ID - **{item['product_id']}**")
+                    col3,col4 = st.colums([2,3])
+                    col3.markdown(f"🔗 Product ID - **{item['product_id']}**")
+                    similarity_percentage = item['similarity'] * 100
+                    color = "green" if similarity_percentage >= 60 else "red"
+                      
+                    with col4:
+                        if st.button('Match'):
+    st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)
+
                     st.markdown(f"🔗 Title - **{item['product_title']}**")
                     st.markdown(f"🔗 Brand - **{item['brand_name']}**")
                     st.markdown(f"🔗 Rating - **{item['rating']}** ⭐")
                     st.markdown(f"🔗 Category - **{item['category']}**") 
                     #st.markdown(f"🔗 Review - {item['review_text'].replace('$', 'USD')}")
                     with st.expander(f"🔗 Open review ✍️ "):
-                        st.markdown(f"**{item['review_text'].replace('$', 'USD')}**")
-                    similarity_percentage = item['similarity'] * 100
-                    color = "green" if similarity_percentage >= 60 else "red"
-                    st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)    
+                        st.markdown(f"**{item['review_text'].replace('$', 'USD')}**")  
                     #st.markdown(f"**{item['similarity']*100}% Match**")          
             st.success('**Successful Recommendation!**', icon="✅")
