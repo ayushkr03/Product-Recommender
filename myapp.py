@@ -109,14 +109,12 @@ if product_id or (brand_name1 and category1):
                 col1, col2 = st.columns([2, 8])
                 with col1:
                     st.image(img, use_column_width="auto") #width=200
-                with col2:
-                    col3,col4 = st.columns([2,3])
-                    col3.markdown(f"🔗 Product ID - **{item['product_id']}**")
+                with col2: 
                     similarity_percentage = item['similarity'] * 100
                     color = "green" if similarity_percentage >= 60 else "red"
-                      
-                    if col4.button('Match'):
-                        st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)
+                    st.markdown(f"🔗 Product ID - **{item['product_id']} <span style='color:{color}'>{similarity_percentage:.2f}% </span>** match", unsafe_allow_html=True)
+                    
+                    #st.markdown(f"**<span style='color:{color}'>{similarity_percentage:.2f}% </span>Match**", unsafe_allow_html=True)
 
                     st.markdown(f"🔗 Title - **{item['product_title']}**")
                     st.markdown(f"🔗 Brand - **{item['brand_name']}**")
